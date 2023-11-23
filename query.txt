@@ -60,3 +60,17 @@ SELECT DISTINCT videogame_id
 FROM reviews
 WHERE rating = 5
 
+BONUS SELECT
+
+Query 11:
+
+SELECT COUNT(id), AVG(rating)
+FROM reviews
+WHERE videogame_id = 412;
+
+Query 12:
+
+SELECT COUNT(id)
+FROM videogames
+WHERE software_house_id = 1 AND YEAR(release_date) = 2018;
+
