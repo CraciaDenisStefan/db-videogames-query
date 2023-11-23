@@ -74,3 +74,45 @@ SELECT COUNT(id)
 FROM videogames
 WHERE software_house_id = 1 AND YEAR(release_date) = 2018;
 
+--------------------------------------------------------------
+
+GROUP BY
+
+Query 1:
+
+SELECT country, COUNT(*)
+FROM software_houses
+GROUP BY country;
+
+Query 2:
+
+SELECT videogame_id, COUNT(*)
+FROM reviews
+GROUP BY videogame_id;
+
+Query 3:
+
+SELECT pegi_label_id, COUNT(*)
+FROM pegi_label_videogame
+GROUP BY pegi_label_id;
+
+Query 4:
+
+SELECT YEAR(release_date), COUNT(*)
+FROM videogames
+GROUP BY YEAR(release_date);
+
+Query 5:
+
+SELECT device_id, COUNT(*)
+FROM device_videogame
+GROUP BY device_id
+
+Query 6:
+
+SELECT videogame_id, AVG(rating)
+FROM reviews
+GROUP BY videogame_id
+ORDER BY  AVG(rating) DESC;
+
+-----------------------------------------------------------------
