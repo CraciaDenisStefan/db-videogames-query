@@ -116,3 +116,112 @@ GROUP BY videogame_id
 ORDER BY  AVG(rating) DESC;
 
 -----------------------------------------------------------------
+
+JOIN
+
+Query 1:
+
+SELECT DISTINCT players.*
+FROM players
+    JOIN reviews 
+        ON players.id = reviews.player_id;
+
+QUery 2:
+
+SELECT DISTINCT videogames.*,tournaments.year
+FROM videogames
+    JOIN tournament_videogame
+        ON tournament_videogame.videogame_id = videogames.id
+    JOIN tournaments
+        ON tournament_videogame.tournament_id = tournaments.id
+WHERE tournaments.year = 2016;
+
+Query 3:
+
+SELECT DISTINCT videogames.*, categories.name AS category
+FROM videogames
+    JOIN category_videogame
+        ON videogames.id = category_videogame.videogame_id
+    JOIN categories
+        ON category_videogame.category_id = categories.id;
+
+Query 4:
+
+SELECT DISTINCT software_houses.*
+FROM software_houses
+    JOIN videogames
+        ON videogames.software_house_id = videogames.id
+WHERE YEAR(videogames.release_date) <2020
+
+Query 5:
+
+SELECT software_houses.name, awards.name AS award
+FROM software_houses
+	JOIN videogames
+		ON videogames.software_house_id = software_houses.id
+	JOIN award_videogame 
+		ON award_videogame.videogame_id = videogames.id
+	JOIN awards 
+    	ON awards.id = award_videogame.award_id;
+
+Query 6:
+
+SELECT DISTINCT videogames.name , categories.name AS 'category', pegi_labels.name AS 'pegi'
+FROM categories
+	JOIN category_videogame 
+    	ON categories.id = category_videogame.category_id
+	JOIN videogames 
+    	ON category_videogame.videogame_id = videogames.id
+    JOIN pegi_label_videogame 
+    	ON videogames.id = pegi_label_videogame.videogame_id
+	JOIN pegi_labels 
+    	ON pegi_label_videogame.pegi_label_id = pegi_labels.id
+	JOIN reviews 
+    	ON videogames.id = reviews.videogame_id
+WHERE reviews.rating BETWEEN 4 AND 5;
+
+Query 7:
+
+SELECT DISTINCT videogames.* 
+FROM videogames
+	JOIN tournament_videogame 
+    	ON videogames.id = tournament_videogame.videogame_id
+	JOIN tournaments 
+    	ON tournament_videogame.tournament_id = tournaments.id
+    JOIN player_tournament 
+    	ON tournaments.id = player_tournament.tournament_id
+	JOIN players 
+    	ON player_tournament.player_id = players.id
+WHERE players.name LIKE 'S%';
+
+Query 8:
+
+SELECT tournaments.city AS 'citta del torneo', videogames.name
+FROM tournaments
+	JOIN tournament_videogame 
+    	ON tournaments.id = tournament_videogame.tournament_id
+	JOIN videogames
+    	ON tournament_videogame.videogame_id = videogames.id
+	JOIN award_videogame 
+    	ON videogames.id = award_videogame.videogame_id
+	JOIN awards
+    	ON award_videogame.award_id = awards.id
+WHERE award_videogame.year = 2018 AND awards.name LIKE 'Gioco dell\'anno';
+
+Query 9:
+
+SELECT players.*
+FROM players
+    JOIN player_tournament 
+        ON players.id = player_tournament.player_id
+    JOIN tournaments 
+        ON player_tournament.tournament_id = tournaments.id
+    JOIN tournament_videogame 
+        ON tournaments.id = tournament_videogame.tournament_id
+    JOIN videogames 
+        ON tournament_videogame.videogame_id = videogames.id
+    JOIN award_videogame 
+        ON videogames.id = award_videogame.videogame_id
+    JOIN awards 
+        ON award_videogame.award_id = awards.id
+WHERE award_videogame.year = 2018 AND tournaments.year = '2019' AND awards.name = 'Gioco più atteso';
