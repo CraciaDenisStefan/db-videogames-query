@@ -1,0 +1,62 @@
+SELECT:
+
+Query 1:
+
+Select *
+FROM software_houses
+WHERE country LIKE 'United States';
+
+Query 2:
+
+Select *
+FROM players
+WHERE city LIKE 'Rogahnland';
+
+Query 3:
+
+Select *
+FROM players
+WHERE name LIKE '%a';
+
+Query 4:
+
+Select *
+FROM reviews
+WHERE player_id = 800;
+
+Query 5:
+
+Select *
+FROM tournaments
+WHERE year = 2015;
+
+Query 6:
+
+Select *
+FROM awards
+WHERE description LIKE '%facere%';
+
+Query 7:
+
+SELECT DISTINCT videogame_id 
+FROM category_videogame 
+WHERE category_id = 2 OR category_id = 6;
+
+Query 8:
+
+SELECT *
+FROM reviews
+WHERE rating BETWEEN 2 AND 4
+
+Query 9:
+
+SELECT * 
+FROM videogames
+WHERE YEAR(release_date) = 2020
+
+Query 10:
+
+SELECT DISTINCT videogame_id 
+FROM reviews
+WHERE rating = 5
+
